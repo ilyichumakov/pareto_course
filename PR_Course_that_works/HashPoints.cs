@@ -8,7 +8,7 @@ namespace PR_Course_that_works
 {
     class HashPoints: System.Windows.Forms.DataVisualization.Charting.Series
     {
-        private List<Hash> TimeTable;
+        public List<Hash> TimeTable;
         public double GetPH(double time)
         {
             foreach (Hash item in this.TimeTable)

@@ -30,8 +30,9 @@ namespace PR_Course_that_works
             double[] T = new double[200];
             int j = 0;
             double ph = 0;
-            System.Windows.Forms.DataVisualization.Charting.Series a = new System.Windows.Forms.DataVisualization.Charting.Series();
-            a.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            List<Hash> b = new List<Hash>();
+            List<Hash> c = new List<Hash>();
+            HashPoints a = new HashPoints(c);
             for (int iph = 0; iph < limj; iph++)
             {
                 if (radioButton1.Checked) ph = 7.0 * iph / 120;
@@ -43,13 +44,20 @@ namespace PR_Course_that_works
                     T[j] = Math.Pow(Math.Log(1 - 120.0 / (A0 + A1 * ph + A2 * ph * ph)) / -B1, 1.0 / B2);
                     LK[j] = (C0 + C1 * ph + C2 * ph * ph) * (1 - Math.Pow(Math.E, -D1 * Math.Pow(T[j], D2)));
                     LKK[j] = (C0 + C1 * ph + C2 * ph * ph) * (1 - Math.Pow(Math.E, (-D1 * Math.Pow(T[j], D2))));
-                    TimeTable.Add(new Hash(T[j], ph));
+                    b.Add(new Hash(T[j], ph));
                     //chart1.Series[0].Points.AddXY(T[j], LK[j]);
                     //chart1.Series[0].Points.AddXY(ph, T[j]);
-                    a.Points.AddXY(T[j], LKK[j]);
+                    c.Add(new Hash(T[j], LKK[j]));
                 }
+                
                 //Console.WriteLine(T[j].ToString() + " " + LK[j].ToString());
                 j++;
+            }
+            a = new HashPoints(b);
+            a.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            foreach (Hash p in c)
+            {
+                a.Points.AddXY(p.key, p.value);
             }
             chart1.Series.Add(a);
             //chart1.ChartAreas[0].AxisX.Minimum = 0;
@@ -107,10 +115,12 @@ namespace PR_Course_that_works
             double[] LK = new double[30000];
             double[] LKK = new double[30000];
             double[] T = new double[30000];
+            List<Hash> d = new List<Hash>();
+            List<Hash> c = new List<Hash>();
+            HashPoints a = new HashPoints(c);
             int j = 0;
             double ph = 0;
-            System.Windows.Forms.DataVisualization.Charting.Series a = new System.Windows.Forms.DataVisualization.Charting.Series();
-            a.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            
             for (int iph = -10000; iph < 10000; iph++)
             {
                 if (radioButton1.Checked) ph = 7.0 * iph / 120;
@@ -128,8 +138,12 @@ namespace PR_Course_that_works
                         //chart1.Series[0].Points.AddXY(ph, T[j]);
                         if (T[j] > 0 && T[j] < 10000 && LKK[j] > 0 && LKK[j] < 10000)
                         {
-                            TimeTable.Add(new Hash(T[j], ph));
-                            a.Points.AddXY(T[j], LKK[j]);
+                            /*TimeTable.Add(new Hash(T[j], ph));
+                            a.Points.AddXY(T[j], LKK[j]);*/
+                            d.Add(new Hash(T[j], ph));
+                            //chart1.Series[0].Points.AddXY(T[j], LK[j]);
+                            //chart1.Series[0].Points.AddXY(ph, T[j]);
+                            c.Add(new Hash(T[j], LKK[j]));
                         }
                     }
                     catch
@@ -139,6 +153,12 @@ namespace PR_Course_that_works
                 }
                 //Console.WriteLine(T[j].ToString() + " " + LK[j].ToString());
                 j++;
+            }
+            a = new HashPoints(d);
+            a.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            foreach (Hash p in c)
+            {
+                a.Points.AddXY(p.key, p.value);
             }
             chart1.Series.Add(a);
             chart1.Series[i].Color = Color.FromArgb(r, g, b);
@@ -204,7 +224,9 @@ namespace PR_Course_that_works
                 try
                 {
                     double ph = -9999.99;
-                    foreach (Hash item in TimeTable)
+                    //foreach (Hash item in TimeTable)
+                    HashPoints a = (HashPoints)res.Series;
+                    foreach (Hash item in a.TimeTable)
                     {
                         if (item.key == res.Series.Points[res.PointIndex].XValue) ph = item.value;
                     }
@@ -323,6 +345,24 @@ namespace PR_Course_that_works
             
             chart1.ChartAreas[0].AxisX.ScaleView.Zoom(100, 100+size);
             chart1.ChartAreas[0].AxisY.ScaleView.Zoom(0, size);
+        }
+
+        public bool IsParetoEffective(System.Windows.Forms.DataVisualization.Charting.Series a, double X, double Y)
+        {
+            bool res = true;
+            //double minY = Y[0];
+            /*foreach (double potentialPoint in Y)
+            {
+                if (potentialPoint < minY) minY = potentialPoint;
+            }*/
+            foreach (System.Windows.Forms.DataVisualization.Charting.DataPoint p in a.Points)
+            { 
+                if (p.XValue!=X && p.YValues[0] !=Y && Math.Abs(p.XValue-X)<)
+                {
+                    
+                }
+            }
+            return res;
         }
     }
 }
