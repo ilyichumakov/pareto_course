@@ -45,12 +45,9 @@ namespace PR_Course_that_works
                     LK[j] = (C0 + C1 * ph + C2 * ph * ph) * (1 - Math.Pow(Math.E, -D1 * Math.Pow(T[j], D2)));
                     LKK[j] = (C0 + C1 * ph + C2 * ph * ph) * (1 - Math.Pow(Math.E, (-D1 * Math.Pow(T[j], D2))));
                     b.Add(new Hash(T[j], ph));
-                    //chart1.Series[0].Points.AddXY(T[j], LK[j]);
-                    //chart1.Series[0].Points.AddXY(ph, T[j]);
                     c.Add(new Hash(T[j], LKK[j]));
                 }
-                
-                //Console.WriteLine(T[j].ToString() + " " + LK[j].ToString());
+
                 j++;
             }
             a = new HashPoints(b);
@@ -60,12 +57,6 @@ namespace PR_Course_that_works
                 a.Points.AddXY(p.key, p.value);
             }
             chart1.Series.Add(a);
-            //chart1.ChartAreas[0].AxisX.Minimum = 0;
-            /*chart1.ChartAreas[0].AxisX.Maximum = 10;*/
-            //chart1.ChartAreas[0].AxisX.Interval = 10;
-            //chart1.ChartAreas[0].AxisY.Minimum = 10;
-            //chart1.ChartAreas[0].AxisY.Maximum = 10;*/
-            //chart1.ChartAreas[0].AxisY.Interval = 20;
             chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Beige;
             chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Beige;
             chart1.ChartAreas[0].AxisX.LineColor = Color.Beige;
@@ -76,8 +67,6 @@ namespace PR_Course_that_works
             chart1.Series[0].Color = Color.Wheat;
             chart1.Series[0].BorderWidth = 2;
             chart1.ChartAreas[0].CursorX.AutoScroll = true;
-
-            // let's zoom to [0,blockSize] (e.g. [0,100])
             chart1.ChartAreas[0].AxisX.ScaleView.Zoomable = true;
             chart1.ChartAreas[0].AxisY.ScaleView.Zoomable = true;
             chart1.ChartAreas[0].AxisX.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
@@ -97,13 +86,6 @@ namespace PR_Course_that_works
 
         public void Testrostki(int i, int r, int g, int b, double A0, double A1, double A2, double B1, double B2, double C0, double C1, double C2, double D1, double D2, int limj)
         {
-            //chart1.Series[0].Points.Clear();
-            //chart1.ChartAreas[0].AxisX.Minimum = 0;
-            /*chart1.ChartAreas[0].AxisX.Maximum = 10;*/
-            //chart1.ChartAreas[0].AxisX.Interval = 10;
-            //chart1.ChartAreas[0].AxisY.Minimum = 10;
-            //chart1.ChartAreas[0].AxisY.Maximum = 10;*/
-            //chart1.ChartAreas[0].AxisY.Interval = 20;
             chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Beige;
             chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.Beige;
             chart1.ChartAreas[0].AxisX.LineColor = Color.Beige;
@@ -134,15 +116,9 @@ namespace PR_Course_that_works
                         T[j] = Math.Pow(Math.Log(1 - 120.0 / (A0 + A1 * ph + A2 * ph * ph)) / -B1, 1.0 / B2);
                         LK[j] = (C0 + C1 * ph + C2 * ph * ph) * (1 - Math.Pow(Math.E, -D1 * Math.Pow(T[j], D2)));
                         LKK[j] = (C0 + C1 * ph + C2 * ph * ph) * (1 - Math.Pow(Math.E, (-D1 * Math.Pow(T[j], D2))));
-                        //chart1.Series[0].Points.AddXY(T[j], LK[j]);
-                        //chart1.Series[0].Points.AddXY(ph, T[j]);
                         if (T[j] > 0 && T[j] < 10000 && LKK[j] > 0 && LKK[j] < 10000)
                         {
-                            /*TimeTable.Add(new Hash(T[j], ph));
-                            a.Points.AddXY(T[j], LKK[j]);*/
-                            d.Add(new Hash(T[j], ph));
-                            //chart1.Series[0].Points.AddXY(T[j], LK[j]);
-                            //chart1.Series[0].Points.AddXY(ph, T[j]);
+                            d.Add(new Hash(T[j], ph)); 
                             c.Add(new Hash(T[j], LKK[j]));
                         }
                     }
@@ -150,8 +126,7 @@ namespace PR_Course_that_works
                     {
                         int f = 0;
                     }
-                }
-                //Console.WriteLine(T[j].ToString() + " " + LK[j].ToString());
+                }                
                 j++;
             }
             a = new HashPoints(d);
@@ -217,8 +192,6 @@ namespace PR_Course_that_works
             label1.Visible = true;
             label2.Visible = true;
             var res = chart1.HitTest(e.X, e.Y);
-            /*label1.Text = (this.PointToClient(Cursor.Position).X-chart1.Location.X).ToString();
-            label2.Text = (this.PointToClient(Cursor.Position).Y - chart1.Location.Y).ToString();*/
             if (res.Series != null)
             {
                 try
@@ -334,7 +307,6 @@ namespace PR_Course_that_works
             {
                 isLeftButtonPressed = true;
                 mouseDown = e.Location;
-
             }
         }
 
@@ -350,14 +322,12 @@ namespace PR_Course_that_works
         public bool IsParetoEffective(System.Windows.Forms.DataVisualization.Charting.Series a, double X, double Y)
         {
             bool res = true;
-            //double minY = Y[0];
-            /*foreach (double potentialPoint in Y)
-            {
-                if (potentialPoint < minY) minY = potentialPoint;
-            }*/
+            double minY = Y;
+            double XminY = X;
+            
             foreach (System.Windows.Forms.DataVisualization.Charting.DataPoint p in a.Points)
             { 
-                if (p.XValue!=X && p.YValues[0] !=Y && Math.Abs(p.XValue-X)<)
+                if (p.XValue!=X && p.YValues[0] !=Y)
                 {
                     
                 }

@@ -125,9 +125,9 @@
             this.radioButton4.AutoSize = true;
             this.radioButton4.Location = new System.Drawing.Point(31, 140);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(125, 17);
+            this.radioButton4.Size = new System.Drawing.Size(144, 17);
             this.radioButton4.TabIndex = 3;
-            this.radioButton4.Text = "pshen altai emp snch";
+            this.radioButton4.Text = "Пшеница алт ЭМП СНЧ";
             this.radioButton4.UseVisualStyleBackColor = true;
             this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
             // 
@@ -136,9 +136,9 @@
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(31, 105);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(124, 17);
+            this.radioButton3.Size = new System.Drawing.Size(137, 17);
             this.radioButton3.TabIndex = 2;
-            this.radioButton3.Text = "polba runo emp snch";
+            this.radioButton3.Text = "Полба Руно ЭМП СНЧ";
             this.radioButton3.UseVisualStyleBackColor = true;
             this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
@@ -147,9 +147,9 @@
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(31, 69);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(135, 17);
+            this.radioButton2.Size = new System.Drawing.Size(126, 17);
             this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "polba runo artificial light";
+            this.radioButton2.Text = "Полба Руно иск осв";
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
@@ -159,10 +159,10 @@
             this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(31, 35);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(136, 17);
+            this.radioButton1.Size = new System.Drawing.Size(133, 17);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "pshen altai artificial light";
+            this.radioButton1.Text = "Пшеница алт иск осв";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
@@ -182,9 +182,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(746, 381);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Zoom";
+            this.label3.Text = "Масштаб";
             // 
             // Form1
             // 
