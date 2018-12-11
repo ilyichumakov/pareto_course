@@ -227,7 +227,20 @@ namespace PR_Course_that_works
         {
             if (radioButton2.Checked)
             {
+                System.Windows.Forms.DataVisualization.Charting.Series effective = new System.Windows.Forms.DataVisualization.Charting.Series();
+                effective.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                effective.Name = "Effective";
+                effective.LegendText = "Effective";
+                effective.Color = Color.FromArgb(0, 200, 200);
                 rostki(41.6096, 74.3114, -4.4328, 0.0000182, 2.02619, 17.501, 21.5838, -1.407, 0.00000918, 2.41374, 130);
+                foreach (System.Windows.Forms.DataVisualization.Charting.DataPoint c in chart1.Series[0].Points)
+                {
+                    if (IsParetoEffective(chart1.Series[0], c.XValue, c.YValues[0]))
+                    {
+                        effective.Points.AddXY(c.XValue, c.YValues[0]);
+                    }
+                }
+                chart1.Series.Add(effective);
                 Form1.ActiveForm.Refresh();
             }
         }
@@ -236,7 +249,20 @@ namespace PR_Course_that_works
         {
             if (radioButton3.Checked)
             {
+                System.Windows.Forms.DataVisualization.Charting.Series effective = new System.Windows.Forms.DataVisualization.Charting.Series();
+                effective.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                effective.Name = "Effective";
+                effective.LegendText = "Effective";
+                effective.Color = Color.FromArgb(0, 200, 200);
                 rostki(15.7373, 86.5843, -5.2542, 0.0000168, 2.0781, 14.0756, 33.9264, -2.5879, 0.0000118, 2.3288, 32);
+                foreach (System.Windows.Forms.DataVisualization.Charting.DataPoint c in chart1.Series[0].Points)
+                {
+                    if (IsParetoEffective(chart1.Series[0], c.XValue, c.YValues[0]))
+                    {
+                        effective.Points.AddXY(c.XValue, c.YValues[0]);
+                    }
+                }
+                chart1.Series.Add(effective);
                 Form1.ActiveForm.Refresh();
             }
         }
@@ -245,7 +271,20 @@ namespace PR_Course_that_works
         {
             if (radioButton4.Checked)
             {
+                System.Windows.Forms.DataVisualization.Charting.Series effective = new System.Windows.Forms.DataVisualization.Charting.Series();
+                effective.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                effective.Name = "Effective";
+                effective.LegendText = "Effective";
+                effective.Color = Color.FromArgb(0, 200, 200);
                 rostki(28.2615, 111.931, -7.3166, 0.0000266, 1.96125, 13.8432, 37.8703, -2.5819, 0.0000394, 2.02327, 90);
+                foreach (System.Windows.Forms.DataVisualization.Charting.DataPoint c in chart1.Series[0].Points)
+                {
+                    if (IsParetoEffective(chart1.Series[0], c.XValue, c.YValues[0]))
+                    {
+                        effective.Points.AddXY(c.XValue, c.YValues[0]);
+                    }
+                }
+                chart1.Series.Add(effective);
                 Form1.ActiveForm.Refresh();
             }
         }
@@ -254,7 +293,20 @@ namespace PR_Course_that_works
         {
             if (radioButton1.Checked)
             {
+                System.Windows.Forms.DataVisualization.Charting.Series effective = new System.Windows.Forms.DataVisualization.Charting.Series();
+                effective.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                effective.Name = "Effective";
+                effective.LegendText = "Effective";
+                effective.Color = Color.FromArgb(0, 200, 200);
                 rostki(49.3646, 58.4976, -4.1285, 0.00000902, 2.30974, 13.5127, 27.5435, -1.8062, 0.0000676, 1.94722, 120);
+                foreach (System.Windows.Forms.DataVisualization.Charting.DataPoint c in chart1.Series[0].Points)
+                {
+                    if (IsParetoEffective(chart1.Series[0], c.XValue, c.YValues[0]))
+                    {
+                        effective.Points.AddXY(c.XValue, c.YValues[0]);
+                    }
+                }
+                chart1.Series.Add(effective);
                 Form1.ActiveForm.Refresh();
             }
         }
@@ -279,6 +331,11 @@ namespace PR_Course_that_works
                 double D1 = 0.0000118;
                 double D2 = 2.3288;
                 int j = 0;
+                System.Windows.Forms.DataVisualization.Charting.Series effective = new System.Windows.Forms.DataVisualization.Charting.Series();
+                effective.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                effective.Name = "Effective";
+                effective.LegendText = "Effective";
+                effective.Color = Color.FromArgb(0, 200, 200);
                 for (int i = 0; i < 10; i++)
                 {
                     Testrostki(j, red, green, blue, A0, A1, A2, B1, B2, C0, C1, C2, D1, D2, 32);
@@ -289,6 +346,14 @@ namespace PR_Course_that_works
                     A1 -= 1;
                     j++;
                 }
+                foreach (System.Windows.Forms.DataVisualization.Charting.DataPoint c in chart1.Series[0].Points)
+                {
+                    if (IsParetoEffective(chart1.Series[0], c.XValue, c.YValues[0]))
+                    {
+                        effective.Points.AddXY(c.XValue, c.YValues[0]);
+                    }
+                }
+                chart1.Series.Add(effective);
             }
         }
 
@@ -321,17 +386,35 @@ namespace PR_Course_that_works
 
         public bool IsParetoEffective(System.Windows.Forms.DataVisualization.Charting.Series a, double X, double Y)
         {
-            bool res = true;
-            double minY = Y;
-            double XminY = X;
-            
+            bool res = false;
+            //System.Windows.Forms.DataVisualization.Charting.DataPoint higherLeft = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0, 0);
+            //System.Windows.Forms.DataVisualization.Charting.DataPoint lowerLeft = new System.Windows.Forms.DataVisualization.Charting.DataPoint(0, 0);
+            bool higher = false;
+            bool lower = false;
+
             foreach (System.Windows.Forms.DataVisualization.Charting.DataPoint p in a.Points)
             { 
                 if (p.XValue!=X && p.YValues[0] !=Y)
                 {
-                    
+                    if (p.XValue<X && p.YValues[0]>Y)
+                    {
+                        //higherLeft = new System.Windows.Forms.DataVisualization.Charting.DataPoint(p.XValue, p.YValues[0]);
+                        higher = true;
+                    }
+                    else if(p.XValue<X && p.YValues[0] < Y)
+                    {
+                        //lowerLeft = new System.Windows.Forms.DataVisualization.Charting.DataPoint(p.XValue, p.YValues[0]);
+                        lower = true;
+                    }
+                    /*else if (p.XValue < X && p.YValues[0] < Y)
+                    {
+
+                    }*/
                 }
             }
+            if (!higher && !lower) res = true;
+            else if (lower && !higher) res = false;
+            else if (!lower && higher) res = true;
             return res;
         }
     }
