@@ -18,8 +18,7 @@ namespace PR_Course_that_works
         }
 
         private bool isLeftButtonPressed = false;
-        private Point mouseDown = Point.Empty;
-        private List<Hash> TimeTable = new List<Hash>();
+        private Point mouseDown = Point.Empty;        
 
         public void rostki(double A0, double A1, double A2, double B1, double B2, double C0, double C1, double C2, double D1, double D2, int limj)
         {
